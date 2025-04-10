@@ -47,12 +47,10 @@ local Data = {
 ]]
 function Utility.GetBall()
     for _, Ball in ipairs(Workspace.Balls:GetChildren()) do
-        -- Only return balls marked as 'real' projectiles
         if Ball:GetAttribute("realBall") then
             return Ball
         end
     end
-    return nil  -- Explicit nil return for clarity
 end
 
 --[[
