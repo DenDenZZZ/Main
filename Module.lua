@@ -9,7 +9,7 @@ local Utility = {}  -- Main utility namespace
 
 -- Consolidated data structure with hierarchical organization
 -- Contains all cached game state information for performance
-local Data = {
+Utility.Data = {
     Player = {  -- Local player state tracking
         character = nil,          -- Player character model reference
         humanoidrootpart = nil,   -- Root part for position tracking
