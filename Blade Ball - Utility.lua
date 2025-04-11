@@ -302,8 +302,9 @@ task.spawn(function()
     end
 end)
 
--- Authentication key assignment
+-- Authentication key assignment & Parry Increment Tracker
 Utility.Key = Utility.ParryKey
+Utility.Parries = 0
 
 --[[
     Function: GetParryData
@@ -367,6 +368,12 @@ function Utility:Parry()
     local Info = Utility:GetParryData("Random")
     for Remote, Args in pairs(Utility.Remotes) do
         Remote:FireServer(Args, Utility.Key, Info[1], Info[2], Info[3], Info[4])
+        Utility.Parries += 1
+        task.delay(0.75, function()
+          if Utility.Parries > 0 then
+            Utility.Parries -= 1
+          end
+        end)
     end
 end
 
