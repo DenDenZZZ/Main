@@ -364,9 +364,9 @@ end
     - Depends on pre-discovered remotes
 ]]
 function Utility:Parry()
-    Utility:GetParryData("Random")
+    local Info = Utility:GetParryData("Random")
     for Remote, Args in pairs(Utility.Remotes) do
-        Remote:FireServer(Args, Utility.Key, Utility:GetParryData(Type)[1], Utility:GetParryData(Type)[2], Utility:GetParryData(Type)[3], Utility:GetParryData(Type)[4])
+        Remote:FireServer(Args, Utility.Key, Info[1], Info[2], Info[3], Info[4])
     end
 end
 
