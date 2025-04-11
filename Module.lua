@@ -100,24 +100,24 @@ function Utility.BallData(Pos)
     if not Ball then return nil end  -- Early exit if no ball
     
     -- Extract basic ball properties
-    Data.Ball.target = Ball:GetAttribute("target")
-    Data.Ball.from = Ball:GetAttribute("from")
-    Data.Ball.ball = Ball
-    Data.Ball.position = Ball.Position
-    Data.Ball.velocity = Ball:FindFirstChild("zoomies").VectorVelocity
-    Data.Ball.speed = Data.Ball.velocity.Magnitude
+    Utility.Data.Ball.target = Ball:GetAttribute("target")
+    Utility.Data.Ball.from = Ball:GetAttribute("from")
+    Utility.Data.Ball.ball = Ball
+    Utility.Data.Ball.position = Ball.Position
+    Utility.Data.Ball.velocity = Ball:FindFirstChild("zoomies").VectorVelocity
+    Utility.Data.Ball.speed = Utility.Data.Ball.velocity.Magnitude
     
     -- Calculate trajectory vectors and angles
-    Data.Ball.direction = (Pos - Data.Ball.position).Unit
-    Data.Ball.dot = math.clamp(Data.Ball.direction:Dot(Data.Ball.velocity.Unit), -1, 1)
-    Data.Ball.radians = math.acos(Data.Ball.dot)
-    Data.Ball.angle = math.deg(Data.Ball.radians)
-    Data.Ball.distance = (Player.Character.HumanoidRootPart.Position - Data.Ball.position).Magnitude
+    Utility.Data.Ball.direction = (Pos - Utility.Data.Ball.position).Unit
+    Utility.Data.Ball.dot = math.clamp(Utility.Data.Ball.direction:Dot(Utility.Data.Ball.velocity.Unit), -1, 1)
+    Utility.Data.Ball.radians = math.acos(Utility.Data.Ball.dot)
+    Utility.Data.Ball.angle = math.deg(Utility.Data.Ball.radians)
+    Utility.Data.Ball.distance = (Player.Character.HumanoidRootPart.Position - Utility.Data.Ball.position).Magnitude
     
     return unpack({
-        Data.Ball.ball, Data.Ball.target, Data.Ball.from, Data.Ball.position,
-        Data.Ball.velocity, Data.Ball.speed, Data.Ball.direction, Data.Ball.dot,
-        Data.Ball.radians, Data.Ball.angle, Data.Ball.distance
+        Utility.Data.Ball.ball, Utility.Data.Ball.target, Utility.Data.Ball.from, Utility.Data.Ball.position,
+        Utility.Data.Ball.velocity, Utility.Data.Ball.speed, Utility.Data.Ball.direction, Utility.Data.Ball.dot,
+        Utility.Data.Ball.radians, Utility.Data.Ball.angle, Utility.Data.Ball.distance
     })
 end
 
@@ -130,17 +130,16 @@ function Utility.TargetData()
     if not Target then return nil end  -- Early exit if no target
     
     -- Cache target components
-    Data.Target.target = Target
-    Data.Target.humanoidrootpart = Target.HumanoidRootPart
-    Data.Target.position = Data.Target.humanoidrootpart.Position
-    Data.Target.velocity = Data.Target.humanoidrootpart.Velocity
-    Data.Target.speed = Data.Target.velocity.Magnitude
-    Data.Target.distance = Distance or 
-        (Player.Character.HumanoidRootPart.Position - Data.Target.position).Magnitude
+    Utility.Data.Target.target = Target
+    Utility.Data.Target.humanoidrootpart = Target.HumanoidRootPart
+    Utility.Data.Target.position = Utility.Data.Target.humanoidrootpart.Position
+    Utility.Data.Target.velocity = Utility.Data.Target.humanoidrootpart.Velocity
+    Utility.Data.Target.speed = Utility.Data.Target.velocity.Magnitude
+    Utility.Data.Target.distance = Distance
     
     return unpack({
-        Data.Target.target, Data.Target.humanoidrootpart, Data.Target.position,
-        Data.Target.velocity, Data.Target.speed, Data.Target.distance
+        Utility.Data.Target.target, Utility.Data.Target.humanoidrootpart, Utility.Data.Target.position,
+        Utility.Data.Target.velocity, Utility.Data.Target.speed, Utility.Data.Target.distance
     })
 end
 
@@ -150,21 +149,21 @@ end
 ]]
 function Utility.PlayerData()
     -- Validate character state
-    Data.Player.character = Player.Character
-    if not Data.Player.character then return nil end
+    Utility.Data.Player.character = Player.Character
+    if not Utility.Data.Player.character then return nil end
     
-    Data.Player.humanoidrootpart = Data.Player.character:FindFirstChild("HumanoidRootPart")
-    if not Data.Player.humanoidrootpart then return nil end
+    Utility.Data.Player.humanoidrootpart = Utility.Data.Player.character:FindFirstChild("HumanoidRootPart")
+    if not Utility.Data.Player.humanoidrootpart then return nil end
     
     -- Update movement metrics
-    Data.Player.position = Data.Player.humanoidrootpart.Position
-    Data.Player.velocity = Data.Player.humanoidrootpart.Velocity
-    Data.Player.speed = Data.Player.velocity.Magnitude
-    Data.Player.ping = math.ceil(Network["Data Ping"]:GetValue())
+    Utility.Data.Player.position = Utility.Data.Player.humanoidrootpart.Position
+    Utility.Data.Player.velocity = Utility.Data.Player.humanoidrootpart.Velocity
+    Utility.Data.Player.speed = Utility.Data.Player.velocity.Magnitude
+    Utility.Data.Player.ping = math.ceil(Network["Data Ping"]:GetValue())
     
     return unpack({
-        Data.Player.character, Data.Player.humanoidrootpart, Data.Player.position,
-        Data.Player.velocity, Data.Player.speed, Data.Player.ping
+        Utility.Data.Player.character, Utility.Data.Player.humanoidrootpart, Utility.Data.Player.position,
+        Utility.Data.Player.velocity, Utility.Data.Player.speed, Utility.Data.Player.ping
     })
 end
 
