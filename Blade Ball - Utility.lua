@@ -370,7 +370,7 @@ function Utility:Parry()
         
         Utility.Parries += 1
         
-        task.delay(0.75, function()
+        task.delay(0.5, function()
           if Utility.Parries >= 1 then
             Utility.Parries -= 1
           end
@@ -379,7 +379,7 @@ function Utility:Parry()
 end
 
 function Utility:IsCurved()
-  if Utility.Data.Ball.dot < 0.85 or Utility.Data.Ball.angle > 45 then
+  if Utility.Data.Ball.dot <= 0.85 and (Utility.Data.Ball.angle >= 45 or Utility.Data.Ball.angle <= 0)then
     return true
     else
       return false
