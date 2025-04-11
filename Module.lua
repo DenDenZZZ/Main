@@ -95,9 +95,9 @@ end
     @param Pos (Vector3) - Reference position for calculations
     @return Multiple values containing complete ball state
 ]]
-function Utility.BallData(Pos)
+function Utility.BallData()
     local Ball = Utility.GetBall()
-    if not Ball then return nil end  -- Early exit if no ball
+    if not Ball or not Player.Character or not Player.Character.HumanoidRootPart then return nil end  -- Early exit if no ball
     
     -- Extract basic ball properties
     Utility.Data.Ball.target = Ball:GetAttribute("target")
@@ -108,7 +108,7 @@ function Utility.BallData(Pos)
     Utility.Data.Ball.speed = Utility.Data.Ball.velocity.Magnitude
     
     -- Calculate trajectory vectors and angles
-    Utility.Data.Ball.direction = (Pos - Utility.Data.Ball.position).Unit
+    Utility.Data.Ball.direction = (Player.Character.HumanoidRootPart.Position - Utility.Data.Ball.position).Unit
     Utility.Data.Ball.dot = math.clamp(Utility.Data.Ball.direction:Dot(Utility.Data.Ball.velocity.Unit), -1, 1)
     Utility.Data.Ball.radians = math.acos(Utility.Data.Ball.dot)
     Utility.Data.Ball.angle = math.deg(Utility.Data.Ball.radians)
