@@ -39,7 +39,7 @@ local Players = game:GetService("Players")
 local Stats = game:GetService("Stats")
 local Network = Stats.Network.ServerStatsItem
 
-local Player = Players.LocalPlaye
+local Player = Players.LocalPlayer
 local Camera = Workspace.CurrentCamera
 local LastInput = UserInputService:GetLastInputType()
 local Vector2MouseLocation = nil
