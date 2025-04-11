@@ -93,7 +93,7 @@ Utility.Data = {
 -- Remote event storage
 Utility.Remotes = {} -- Stores discovered remote events
 Utility.ParryKey = nil -- Authentication key for parry events
-
+Utility.Parries = 0
 --[[
     Function: GetBall
     -----------------
@@ -367,7 +367,23 @@ function Utility:Parry()
     local Info = Utility:GetParryData("Random")
     for Remote, Args in pairs(Utility.Remotes) do
         Remote:FireServer(Args, Utility.Key, Info[1], Info[2], Info[3], Info[4])
+        
+        Utility.Parries += 1
+        
+        task.delay(0.75, function()
+          if Utility.Parries >= 1 then
+            Utility.Parries -= 1
+          end
+        end)
     end
+end
+
+function Utility:IsCurved()
+  if Utility.Data.Ball.dot < 0.85 or Utility.Data.Ball.angle > 45 then
+    return true
+    else
+      return false
+  end
 end
 
 -- Module export
