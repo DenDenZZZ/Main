@@ -364,9 +364,9 @@ end
     - Depends on pre-discovered remotes
 ]]
 function Utility:Parry()
-    Utility.GetParryData(Type)
-    for Remote, Args in pairs(Remotes) do
-        Remote:FireServer(Args, Key, Utility.GetParryData(Type)[1], Utility.GetParryData(Type)[2], Utility.GetParryData(Type)[3], Utility.GetParryData(Type)[4])
+    Utility:GetParryData(Type)
+    for Remote, Args in pairs(Utility.Remotes) do
+        Remote:FireServer(Args, Utility.Key, Utility:GetParryData(Type)[1], Utility:GetParryData(Type)[2], Utility:GetParryData(Type)[3], Utility:GetParryData(Type)[4])
     end
 end
 
