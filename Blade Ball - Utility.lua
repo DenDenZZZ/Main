@@ -150,7 +150,7 @@ function Utility:GetTarget()
             local Humanoid = Entity:FindFirstChildOfClass("Humanoid")
             
             if RootPart and Humanoid and Humanoid.Health > 0 then
-                local Distance = Player:DistanceFromCharacter(RootPart.Position)
+                local Distance = (HumanoidRootPart.Position - RootPart.Position).Magnitude
                 
                 if Distance < MaxDistance then
                     MaxDistance = Distance
@@ -199,7 +199,7 @@ function Utility:BallData()
     Utility.Data.Ball.dot = math.clamp(Utility.Data.Ball.direction:Dot(Utility.Data.Ball.velocity.Unit), -1, 1)
     Utility.Data.Ball.radians = math.acos(Utility.Data.Ball.dot)
     Utility.Data.Ball.angle = math.deg(Utility.Data.Ball.radians)
-    Utility.Data.Ball.distance = Player:DistanceFromCharacter(Ball.Position)
+    Utility.Data.Ball.distance = (Player.Character.HumanoidRootPart.Position - Ball.Position).Magnitude
     
     return unpack({
         Utility.Data.Ball.ball, Utility.Data.Ball.target, Utility.Data.Ball.from, Utility.Data.Ball.position,
@@ -379,7 +379,7 @@ function Utility:Parry()
 end
 
 function Utility:IsCurved()
-  if Utility.Data.Ball.dot <= 0.85 and (Utility.Data.Ball.angle >= 45 or Utility.Data.Ball.angle <= 0)then
+  if Utility.Data.Ball.dot <= 0.85 and (Utility.Data.Ball.angle >= 45 or Utility.Data.Ball.angle <= 0) then
     return true
     else
       return false
