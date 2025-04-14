@@ -183,7 +183,7 @@ end
     - Multiple values containing complete ball state
 ]]
 function Utility:BallData()
-    local Ball = Utility.GetBall()
+    local Ball = Utility:GetBall()
     if not Ball or not Player.Character or not Player.Character.HumanoidRootPart then return nil end
     
     -- Core ball properties
@@ -222,8 +222,8 @@ end
     - Multiple values containing target state data
 ]]
 function Utility:TargetData()
-    local Target, Distance = Utility.GetTarget()
-    if not Target then return nil end
+    local Target, Distance = Utility:GetTarget()
+    if not Target or not Distance then return nil end
     
     Utility.Data.Target.target = Target
     Utility.Data.Target.humanoidrootpart = Target.HumanoidRootPart
