@@ -290,7 +290,7 @@ task.spawn(function()
                 local Upvalues = debug.getupvalues(Value)
                 local Constants = debug.getconstants(Value)
 
-                if #Protos == 4 and #Upvalues == 24 and #Constants == 102 then
+                if #Protos == 4 and #Upvalues == 24 and #Constants == 104 then
                     Utility.Remotes[debug.getupvalue(Value, 16)] = debug.getconstant(Value, 60)
                     Utility.ParryKey = debug.getupvalue(Value, 17)
                     Utility.Remotes[debug.getupvalue(Value, 18)] = debug.getconstant(Value, 62)
