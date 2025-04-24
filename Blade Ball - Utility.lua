@@ -364,7 +364,7 @@ end
     - Depends on pre-discovered remotes
 ]]
 function Utility:Parry()
-    local Info = Utility:GetParryData("Random")
+    local Info = Utility:GetParryData(Type)
     for Remote, Args in pairs(Utility.Remotes) do
         Remote:FireServer(nil, Utility.Key, Info[1], Info[2], Info[3], Info[4])
         
@@ -379,7 +379,7 @@ function Utility:Parry()
 end
 
 function Utility:IsCurved()
-  if Utility.Data.Ball.dot <= 0.85 and (Utility.Data.Ball.angle >= 45 or Utility.Data.Ball.angle <= 0) then
+  if Utility.Data.Ball.dot <= 0.85 or math.abs(Utility.Data.Ball.angle) >= 0 then
     return true
     else
       return false
