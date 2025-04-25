@@ -366,16 +366,15 @@ end
 function Utility:Parry()
     local Info = Utility:GetParryData(Type)
     for Remote, Args in pairs(Utility.Remotes) do
-        Remote:FireServer(nil, Utility.Key, Info[1], Info[2], Info[3], Info[4])
-        
-        Utility.Parries += 1
-        
-        task.delay(0.5, function()
-          if Utility.Parries >= 1 then
-            Utility.Parries -= 1
-          end
-        end)
+        Remote:FireServer(Args, Utility.Key, Info[1], Info[2], Info[3], Info[4])
     end
+    Utility.Parries += 1
+    
+    task.delay(0.5, function()
+      if Utility.Parries >= 1 then
+        Utility.Parries -= 1
+      end
+    end)
 end
 
 function Utility:IsCurved()
