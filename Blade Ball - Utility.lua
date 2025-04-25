@@ -290,9 +290,10 @@ task.spawn(function()
                 local Upvalues = debug.getupvalues(Value)
                 local Constants = debug.getconstants(Value)
 
-                if #Protos == 4 and #Upvalues == 24 and #Constants == 106 then
+                if #Protos == 4 and #Upvalues == 24 and #Constants == 102 then
                     Utility.Remotes[debug.getupvalue(Value, 16)] = debug.getconstant(Value, 62)
                     Utility.ParryKey = debug.getupvalue(Value, 17)
+                    Utility.Key = Utility.ParryKey
                     Utility.Remotes[debug.getupvalue(Value, 18)] = debug.getconstant(Value, 64)
                     Utility.Remotes[debug.getupvalue(Value, 19)] = debug.getconstant(Value, 65)
                     break
@@ -366,12 +367,12 @@ end
 function Utility:Parry()
     local Info = Utility:GetParryData(Type)
     for Remote, Args in pairs(Utility.Remotes) do
-        Remote:FireServer(Args, Utility.Key, Info[1], Info[2], Info[3], Info[4])
+        Remote:FireServer(nil, Utility.Key, Info[1], Info[2], Info[3], Info[4])
     end
     Utility.Parries += 1
     
-    task.delay(0.5, function()
-      if Utility.Parries >= 1 then
+    task.delay(0.3, function()
+      if Utility.Parries > 0 then
         Utility.Parries -= 1
       end
     end)
