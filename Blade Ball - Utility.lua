@@ -303,9 +303,6 @@ task.spawn(function()
     end
 end)
 
--- Authentication key assignment & Parry Increment Tracker
-Utility.Key = Utility.ParryKey
-
 --[[
     Function: GetParryData
     ---------------------
@@ -378,13 +375,4 @@ function Utility:Parry()
     end)
 end
 
-function Utility:IsCurved()
-  if Utility.Data.Ball.dot <= 0.85 or math.abs(Utility.Data.Ball.angle) >= 0 then
-    return true
-    else
-      return false
-  end
-end
-
--- Module export
 return Utility
